@@ -1,9 +1,10 @@
 (ns user
-  (:require [clj-time.core :refer :all]
-            [clj-time.format :refer :all]
+  (:require [clj-time.core :as core :refer :all :rename {second clj-second
+                                                         extend clj-extend}]
+            [clj-time.format :as format :refer :all]
             [clj-time.coerce :as coerce])
   (:import (org.joda.time LocalDate)
-           (org.joda.time.format PeriodFormatterBuilder ISOPeriodFormat PeriodFormat)))
+           (org.joda.time.format PeriodFormat)))
 
 (def local-date-formatter (formatter-local "EEEE, MMMM d, yyyy"))
 

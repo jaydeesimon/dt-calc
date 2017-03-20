@@ -9,4 +9,9 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
              :dev {:source-paths ["src" "dev"]}}
-  :repl-options {:init-ns user})
+  :repl-options {:init-ns user
+                 :welcome (do (println "\nSOME FUNCTIONS AVAILABLE")
+                              (println "~~~~~~~~~~~~~~~~~~~~~~~~")
+                              (println "(from-today & ps)\n")
+                              (println "(ago-today & ps)\n")
+                              (println "(time-pass start end)\n"))})
