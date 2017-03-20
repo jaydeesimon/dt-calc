@@ -1,6 +1,6 @@
 (ns user
-  (:require [clj-time.core :as core :refer :all :rename {second clj-second
-                                                         extend clj-extend}]
+  (:require [clj-time.core :as core :refer :all :rename {second clj-time-second
+                                                         extend clj-time-extend}]
             [clj-time.format :as format :refer :all]
             [clj-time.coerce :as coerce])
   (:import (org.joda.time LocalDate)
