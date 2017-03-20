@@ -1,8 +1,9 @@
 (ns user
   (:require [clj-time.core :refer :all]
-            [clj-time.format :refer :all])
-  (:import (org.joda.time LocalDate Interval)
-           (org.joda.time.format PeriodFormatterBuilder)))
+            [clj-time.format :refer :all]
+            [clj-time.coerce :as coerce])
+  (:import (org.joda.time LocalDate)
+           (org.joda.time.format PeriodFormatterBuilder ISOPeriodFormat PeriodFormat)))
 
 (def local-date-formatter (formatter-local "EEEE, MMMM d, yyyy"))
 
@@ -18,18 +19,9 @@
 (defn ago-today [& ps]
   (qf (apply (partial minus (today)) ps)))
 
-(defn format-period [start end]
-  (let [[start end] (sort [start end])
+(defn time-pass [start end]
+  (let [[start end] (sort [(coerce/to-date-time start)
+                           (coerce/to-date-time end)])
         period (-> (interval start end) (.toPeriod))
-        fmt (-> (PeriodFormatterBuilder.)
-                (.printZeroAlways)
-                (.appendYears)
-                (.appendSuffix " year" " years")
-                (.appendSeparator ", ")
-                (.appendMonths)
-                (.appendSuffix " month" " months")
-                (.appendSeparator ", ")
-                (.appendDays)
-                (.appendSuffix " day" " days")
-                (.toFormatter))]
+        fmt (PeriodFormat/wordBased)]
     (.print fmt period)))
