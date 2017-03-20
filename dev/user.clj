@@ -1,6 +1,7 @@
 (ns user
   (:require [clj-time.core :as core :refer :all :rename {second clj-time-second
-                                                         extend clj-time-extend}]
+                                                         extend clj-time-extend
+                                                         yesterday clj-time-yesterday}]
             [clj-time.format :as format :refer :all]
             [clj-time.coerce :as coerce])
   (:import (org.joda.time LocalDate)
@@ -26,3 +27,9 @@
         period (-> (interval start end) (.toPeriod))
         fmt (PeriodFormat/wordBased)]
     (.print fmt period)))
+
+(defn tomorrow []
+  (plus (today) (days 1)))
+
+(defn yesterday []
+  (minus (today) (days 1)))
