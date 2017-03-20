@@ -11,8 +11,8 @@
                   [unparse (formatter :rfc822)])]
     (f fmt dt)))
 
-(defn plus-from-today [& ps]
-  (apply (partial plus (today)) ps))
+(defn from-today [& ps]
+  (qf (apply (partial plus (today)) ps)))
 
-(defn minus-from-today [& ps]
-  (apply (partial minus (today)) ps))
+(defn ago-today [& ps]
+  (qf (apply (partial minus (today)) ps)))
